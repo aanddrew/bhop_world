@@ -5,17 +5,19 @@
 #include "PlayerController.h"
 #include "Map.h"
 
-#include <SFML/Graphics.hpp>
+#include <SDL2/SDL.h>
 
 namespace bh {
     
 class Game {
 public:
-    Game(sf::RenderWindow& window_in);
+    Game(SDL_Window* window_in);
     static const GameSettings& get_settings();
 
     bool is_paused() const;
     void set_paused(bool paused_in);
+
+    bool is_running() const;
 
     void update(float dt);
     void render();
@@ -24,10 +26,12 @@ private:
     PlayerController pc;
     Map map;
 
-    sf::RenderWindow& window;
+    SDL_Window* window;
+    s3::Shader shader;
 
     static GameSettings settings;
     bool paused;
+    bool running;
 };
 
 }

@@ -1,5 +1,5 @@
 #ifndef S3WINDOW_H
-#define S3WINDOW_Hglm::vec3 translation
+#define S3WINDOW_H
 
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>

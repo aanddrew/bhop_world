@@ -5,22 +5,27 @@
 namespace bh {
 
 Player::Player() 
-: Player({0,0,0})
+: Player({0.0f,0.0f,0.0f})
 {}
 
-Player::Player(const Vec3& start_location)
-: camera(start_location)
+Player::Player(const glm::vec3& start_location)
+: velocity(0.0f, 0.0f, 0.0f)
 {
+    camera.setPos(start_location);
     airborne = false;
     move_speed = 13.0f;
 }
 
 void Player::update(float dt) {
     velocity += acceleration * dt;
-    camera.move_location(velocity * dt);
+    camera.translate(velocity * dt);
+    //camera.movePos(glm::vec3(0.0f, 0.001f, 0.0f));
+    std::cout << "camera:" << std::endl;
+    std::cout << velocity.x << ", " << velocity.y << ", " << velocity.z << std::endl;
+    std::cout << camera.getPos().x << ", " << camera.getPos().y << ", " << camera.getPos().z << std::endl;
 }
 
-void Player::accelerate(const Vec3& wishdir, float dt) {
+void Player::accelerate(const glm::vec3& wishdir, float dt) {
     if (airborne) {
         air_accelerate(wishdir, dt);
     }
@@ -28,25 +33,25 @@ void Player::accelerate(const Vec3& wishdir, float dt) {
         ground_accelerate(wishdir, dt);
     }
         
-    std::cout << velocity.magnitude() << std::endl;
+    //std::cout << glm::length(velocity) << std::endl;
 }
 
-void Player::set_velocity(const Vec3& wishvel) {
+void Player::set_velocity(const glm::vec3& wishvel) {
     velocity = wishvel;
 }
-void Player::set_location(const Vec3& wishloc) {
-    camera.set_location(wishloc);
+void Player::set_location(const glm::vec3& wishloc) {
+    camera.setPos(wishloc);
 }
 
-Camera& Player::get_camera() {
+s3::Camera& Player::get_camera() {
     return camera;
 }
 
-const Vec3& Player::get_location() const {
-    return camera.get_location();
+const glm::vec3& Player::get_location() const {
+    return camera.getPos();
 }
 
-const Vec3& Player::get_velocity() const {
+const glm::vec3& Player::get_velocity() const {
     return velocity;
 }
 
@@ -73,7 +78,7 @@ void Player::set_walking(bool new_walk) {
 bool Player::jump() {
     if(!airborne) {
         set_airborne(true);
-        velocity += Vec3(0, 15, 0);
+        velocity += glm::vec3(0.0f, 15.0f, 0.0f);
         return true;
     }
     return false;
@@ -87,27 +92,27 @@ void Player::set_move_speed(float new_speed) {
     move_speed = new_speed;
 }
 
-void Player::ground_accelerate(const Vec3& wishdir, float dt) {
+void Player::ground_accelerate(const glm::vec3& wishdir, float dt) {
     float speed_now = move_speed;
     if (walking)
         speed_now *= 0.5;
 
-    velocity += wishdir * speed_now * 10 * dt;
-    float mag_velocity = Vec3(velocity.x, 0, velocity.z).magnitude();
+    velocity += wishdir * speed_now * 10.0f * dt;
+    float mag_velocity = glm::length(glm::vec3(velocity.x, 0, velocity.z));
     if (mag_velocity > speed_now) {
         float multi = speed_now/mag_velocity;
         velocity.x *= multi;
         velocity.z *= multi;
     }
     //apply ground friction
-    float friction = speed_now*0.5 * dt;
+    float friction = speed_now * 0.5f * dt;
     velocity = velocity - (velocity * friction);
 }
 
 //code literally copied directly from source sdk
-void Player::air_accelerate(const Vec3& wishdir, float dt) {
+void Player::air_accelerate(const glm::vec3& wishdir, float dt) {
     float accel = 1500;
-    float currentspeed = Vec3(velocity.x, 0, velocity.z).magnitude();
+    float currentspeed = glm::length(glm::vec3(velocity.x, 0, velocity.z));
     float addspeed = 0.1;
     float accelspeed = 0.1;
 	float wishspd = 1;
@@ -119,7 +124,7 @@ void Player::air_accelerate(const Vec3& wishdir, float dt) {
 		wishspd = air_speed_cap;
 
 	// Determine veer amount
-    currentspeed = Vec3::dot(velocity, wishdir);
+    currentspeed = glm::dot(velocity, wishdir);
 
 	// See how much to add
 	addspeed = wishspd - currentspeed;
@@ -136,11 +141,11 @@ void Player::air_accelerate(const Vec3& wishdir, float dt) {
 		accelspeed = addspeed;
 	
 	// Adjust pmove vel.
-    velocity += wishdir * accelspeed;
+    velocity = velocity + (wishdir * accelspeed);
 }
 
 void Player::bleed_speed(float fraction) {
-    //float currentspeed = Vec3(velocity.x, 0, velocity.z).magnitude();
+    //float currentspeed = glm::vec3(velocity.x, 0, velocity.z).magnitude();
     //newspeed *= (1 - fraction);
     velocity.x *= (1 - fraction);
     velocity.z *= (1 - fraction);

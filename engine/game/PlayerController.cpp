@@ -13,11 +13,11 @@ PlayerController::PlayerController(Player* player_in)
     for(int i = 0; i < NUM_MOVE_FLAGS; i++) {
         moving[i] = false;
     }
-    movement_mode = NORMAL;
+    movement_mode = NOCLIP;
     noclip_speed = 50.0f;
 }
 
-void PlayerController::KeyDown(sf::Keyboard::Key key) {
+void PlayerController::KeyDown(SDL_Keycode key) {
     if (key == Game::get_settings().forward_key){
         moving[FORWARD] = true;
     }
@@ -40,7 +40,7 @@ void PlayerController::KeyDown(sf::Keyboard::Key key) {
     }
 }
 
-void PlayerController::KeyUp(sf::Keyboard::Key key) {
+void PlayerController::KeyUp(SDL_Keycode key) {
     if (key == Game::get_settings().forward_key){
         moving[FORWARD] = false;
     }
@@ -63,24 +63,25 @@ void PlayerController::KeyUp(sf::Keyboard::Key key) {
 }
 
 void PlayerController::MouseInput(float dx, float dy) {
-    player->get_camera().rotate(dx, dy);
+    player->get_camera().rotateUp(dy * 0.01);
+    player->get_camera().rotateRight(dx * 0.01);
 }
 
 void PlayerController::update(float dt) {
     switch(movement_mode) {
         case NOCLIP: {
-            Vec3 wishdir(0,0,0);
+            glm::vec3 wishdir(0.0f,0.0f,0.0f);
             if (moving[RIGHT]){
-                wishdir += player->get_camera().get_right();
+                wishdir += player->get_camera().getRight();
             }
             if (moving[LEFT]){
-                wishdir -= player->get_camera().get_right();
+                wishdir -= player->get_camera().getRight();
             }
             if (moving[FORWARD]){
-                wishdir += player->get_camera().get_forward();
+                wishdir += player->get_camera().getForward();
             }
             if (moving[BACKWARD]){
-                wishdir -= player->get_camera().get_forward();
+                wishdir -= player->get_camera().getForward();
             }
 
             //now normalize it to the x/z plane
@@ -90,27 +91,27 @@ void PlayerController::update(float dt) {
         }
         break;
         case NORMAL: {
-            Vec3 wishdir(0,0,0);
+            glm::vec3 wishdir(0.0f, 0.0f, 0.0f);
             if (moving[RIGHT]){
-                wishdir += player->get_camera().get_right();
+                wishdir += player->get_camera().getRight();
             }
             if (moving[LEFT]){
-                wishdir -= player->get_camera().get_right();
+                wishdir -= player->get_camera().getRight();
             }
             if (moving[FORWARD]){
-                wishdir += player->get_camera().get_forward();
+                wishdir += player->get_camera().getForward();
             }
             if (moving[BACKWARD]){
-                wishdir -= player->get_camera().get_forward();
+                wishdir -= player->get_camera().getForward();
             }
 
             if (moving[JUMP] && !player->is_airborne()) {
                 player->jump();
             }
     
-            Vec3 wishdir_xz(wishdir.x, 0, wishdir.z);
+            glm::vec3 wishdir_xz(wishdir.x, 0.0f, wishdir.z);
             //now normalize it to the x/z plane
-            player->accelerate(wishdir_xz.normalize(), dt);
+            player->accelerate(glm::normalize(wishdir_xz), dt);
             player->update(dt);
 
         }

@@ -1,5 +1,7 @@
+include ../../common.make
+
 DEPS=*.h
 ../../obj/%.o: %.cpp $(DEPS)
-	$(CXX) -c -o $@ $< $(CFLAGS)
+	$(CXX) $(IFLAGS) -c -o $@ $< $(CFLAGS) 
 
-all: ../../obj/Camera.o ../../obj/Tri2.o ../../obj/Tri3.o
+all: ../../obj/Tri3.o

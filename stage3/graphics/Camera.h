@@ -16,13 +16,14 @@ public:
 
 	void translate(const glm::vec3& translation);
 	void setPos(glm::vec3 newPosition);
+    void movePos(glm::vec3 deltaPos);
 
-	glm::vec3 getForward();
-	glm::vec3 getRight();
-	glm::vec3 getUp();
-	glm::vec3 getPos();
+	glm::vec3 getForward() const;
+	glm::vec3 getRight() const;
+	glm::vec3 getUp() const;
+	glm::vec3 getPos() const;
 
-	glm::mat4 getMatrix();
+	glm::mat4 getMatrix() const;
 private:
 	void normalizeFrame();
 	//location of camera

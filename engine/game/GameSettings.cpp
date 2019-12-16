@@ -19,12 +19,12 @@ GameSettings load_default_settings() {
         0.01,
         0.01,
         25,
-        sf::Keyboard::Key::W,
-        sf::Keyboard::Key::S,
-        sf::Keyboard::Key::D,
-        sf::Keyboard::Key::A,
-        sf::Keyboard::Key::Space,
-        sf::Keyboard::Key::LShift,
+        SDLK_w,
+        SDLK_s,
+        SDLK_d,
+        SDLK_a,
+        SDLK_SPACE,
+        SDLK_LSHIFT,
     };
 }
 

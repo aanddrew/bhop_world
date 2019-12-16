@@ -1,18 +1,16 @@
-export CXX=g++
-export CFLAGS=-std=c++14 -g -Wall -fsplit-stack
-export LFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+include common.make
 
-OBJS=obj/*.o
+OBJS=obj/*.o stage3/obj/*.o
 
 %.o: %.cpp
-	$(CXX) -c -o obj/$@ $< $(LFLAGS)
+	$(CXX) $(IFLAGS) -c -o obj/$@ $< $(LFLAGS) 
 
 bhop_world: main.o
 	+$(MAKE) -C engine/graphics
 	+$(MAKE) -C engine/math
 	+$(MAKE) -C engine/game
 	+$(MAKE) -C engine/physics
-	+$(MAKE) -C engine/gui
+	+$(MAKE) -C stage3
 	$(CXX) -o bhop_world $(OBJS) $(LFLAGS)
 
 .PHONY : clean

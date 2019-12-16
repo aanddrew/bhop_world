@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include <SDL2/SDL.h>
 
 #include "Player.h"
 
@@ -10,8 +10,8 @@ class PlayerController {
 public:
     PlayerController(Player* player_in);
 
-    void KeyDown(sf::Keyboard::Key key);
-    void KeyUp(sf::Keyboard::Key key);
+    void KeyDown(SDL_Keycode key);
+    void KeyUp(SDL_Keycode key);
     void MouseInput(float dx, float dy);
 
     enum MODES {

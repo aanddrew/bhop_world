@@ -16,7 +16,7 @@ Camera::Camera()
 	// std::cout << "right vector: [" << right[0] << ", " << right[1] << ", " << right[2] << "]" << std::endl;
 }
 
-glm::mat4 Camera::getMatrix()
+glm::mat4 Camera::getMatrix() const
 {
 	return glm::lookAt(pos, pos + forward, up);
 }
@@ -63,6 +63,10 @@ void Camera::setPos(glm::vec3 newPos)
 	pos = newPos;
 }
 
+void Camera::movePos(glm::vec3 deltaPos) {
+    pos += deltaPos;
+}
+
 void Camera::normalizeFrame()
 {
 	forward = normalize(forward);
@@ -70,9 +74,9 @@ void Camera::normalizeFrame()
 	right = normalize(right);
 }
 
-glm::vec3 Camera::getForward() {return forward;}
-glm::vec3 Camera::getRight() {return right;}
-glm::vec3 Camera::getUp() {return up;}
-glm::vec3 Camera::getPos() {return pos;}
+glm::vec3 Camera::getForward() const {return forward;}
+glm::vec3 Camera::getRight() const {return right;}
+glm::vec3 Camera::getUp() const {return up;}
+glm::vec3 Camera::getPos() const {return pos;}
 
 }

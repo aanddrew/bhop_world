@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <SFML/Graphics.hpp>
+#include <SDL2/SDL.h>
 
 namespace bh {
 
@@ -11,12 +11,12 @@ struct GameSettings {
     float ground_acceleration;
     float gravity;
 
-    sf::Keyboard::Key forward_key;
-    sf::Keyboard::Key backward_key;
-    sf::Keyboard::Key right_key;
-    sf::Keyboard::Key left_key;
-    sf::Keyboard::Key jump_key;
-    sf::Keyboard::Key walk_key;
+    SDL_Keycode forward_key;
+    SDL_Keycode backward_key;
+    SDL_Keycode right_key;
+    SDL_Keycode left_key;
+    SDL_Keycode jump_key;
+    SDL_Keycode walk_key;
 };
 
 void load_settings_from_file(const std::string& file_name, GameSettings& settings);

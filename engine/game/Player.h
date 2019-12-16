@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../math/Vec3.h"
-#include "../graphics/Camera.h"
+#include <stage3/graphics/Camera.h>
 
 namespace bh {
     
@@ -9,18 +8,18 @@ namespace bh {
 class Player {
 public:
     Player();
-    Player(const Vec3& start_location);
+    Player(const glm::vec3& start_location);
 
-    Camera& get_camera();
+    s3::Camera& get_camera();
 
     void update(float dt);
 
-    const Vec3& get_location() const;
-    const Vec3& get_velocity() const;
+    const glm::vec3& get_location() const;
+    const glm::vec3& get_velocity() const;
 
-    void accelerate(const Vec3& wishdir, float dt);
-    void set_velocity(const Vec3& wishvel);
-    void set_location(const Vec3& wishloc);
+    void accelerate(const glm::vec3& wishdir, float dt);
+    void set_velocity(const glm::vec3& wishvel);
+    void set_location(const glm::vec3& wishloc);
 
     void bleed_speed(float fraction);
 
@@ -37,12 +36,12 @@ public:
 
     float get_radius() const;
 private:
-    Camera camera;
-    Vec3 velocity;
-    Vec3 acceleration;
+    s3::Camera camera;
+    glm::vec3 velocity;
+    glm::vec3 acceleration;
 
-    void ground_accelerate(const Vec3& wishdir, float dt);
-    void air_accelerate(const Vec3& wishdir, float dt);
+    void ground_accelerate(const glm::vec3& wishdir, float dt);
+    void air_accelerate(const glm::vec3& wishdir, float dt);
 
     float move_speed;
 
