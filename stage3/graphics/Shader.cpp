@@ -131,6 +131,7 @@ GLuint Shader::createUniform(const std::string& name)
 {
 	GLuint uniformID = glGetUniformLocation(programID, name.c_str());
 	uniforms[name] = uniformID;
+    return uniformID;
 }
 
 GLuint Shader::getUniformID(const std::string& name)

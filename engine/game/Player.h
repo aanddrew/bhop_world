@@ -20,6 +20,7 @@ public:
     void accelerate(const glm::vec3& wishdir, float dt);
     void set_velocity(const glm::vec3& wishvel);
     void set_location(const glm::vec3& wishloc);
+    void apply_gravity(const glm::vec3& gravity, float dt);
 
     void bleed_speed(float fraction);
 

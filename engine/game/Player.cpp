@@ -5,13 +5,13 @@
 namespace bh {
 
 Player::Player() 
-: Player({0.0f,0.0f,0.0f})
+: Player(glm::vec3(0.0f,0.0f,0.0f))
 {}
 
 Player::Player(const glm::vec3& start_location)
 : velocity(0.0f, 0.0f, 0.0f)
 {
-    camera.setPos(start_location);
+    //camera.setPos(start_location);
     airborne = false;
     move_speed = 13.0f;
 }
@@ -41,6 +41,11 @@ void Player::set_velocity(const glm::vec3& wishvel) {
 }
 void Player::set_location(const glm::vec3& wishloc) {
     camera.setPos(wishloc);
+}
+
+void Player::apply_gravity(const glm::vec3& gravity, float dt) {
+    if (airborne)
+        velocity += gravity * dt;
 }
 
 s3::Camera& Player::get_camera() {
@@ -97,7 +102,7 @@ void Player::ground_accelerate(const glm::vec3& wishdir, float dt) {
     if (walking)
         speed_now *= 0.5;
 
-    velocity += wishdir * speed_now * 10.0f * dt;
+    velocity = velocity + wishdir * speed_now * 10.0f * dt;
     float mag_velocity = glm::length(glm::vec3(velocity.x, 0, velocity.z));
     if (mag_velocity > speed_now) {
         float multi = speed_now/mag_velocity;

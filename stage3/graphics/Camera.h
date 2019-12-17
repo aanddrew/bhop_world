@@ -16,7 +16,6 @@ public:
 
 	void translate(const glm::vec3& translation);
 	void setPos(glm::vec3 newPosition);
-    void movePos(glm::vec3 deltaPos);
 
 	glm::vec3 getForward() const;
 	glm::vec3 getRight() const;

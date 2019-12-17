@@ -109,7 +109,6 @@ void Game::update(float dt) {
         else if (e.type == SDL_KEYUP) {
             pc.KeyUp(e.key.keysym.sym);
             if (e.key.keysym.sym == SDLK_f) {
-                printf("hi\n");
                 pc.set_movement_mode((pc.get_movement_mode() == 
                                     bh::PlayerController::MODES::NOCLIP)
                                   ? bh::PlayerController::MODES::NORMAL
@@ -139,10 +138,12 @@ void Game::update(float dt) {
 	int dy = y - (h/2);
 
 	pc.MouseInput(-1*dx, -1*dy);
+    SDL_ShowCursor(0);
 
 	if (dx != 0 || dy != 0)
 		SDL_WarpMouseInWindow(window, w/2, h/2);
 
+    player.apply_gravity(glm::vec3(0.0f, -1 * settings.gravity, 0.0f), dt);
     pc.update(dt);
 }
 

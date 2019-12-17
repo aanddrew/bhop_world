@@ -8,7 +8,7 @@ namespace s3
 
 Camera::Camera()
 {
-	pos = glm::vec3(0.0f, 0.0f, 5.0f);
+	pos = glm::vec3(0.0f, 0.0f, 0.0f);
 	//construct our frame
 	forward = glm::vec3(0.0f, 0.0f, -1.0f);
 	up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -61,10 +61,6 @@ void Camera::translate(const glm::vec3& translation)
 void Camera::setPos(glm::vec3 newPos)
 {
 	pos = newPos;
-}
-
-void Camera::movePos(glm::vec3 deltaPos) {
-    pos += deltaPos;
 }
 
 void Camera::normalizeFrame()
