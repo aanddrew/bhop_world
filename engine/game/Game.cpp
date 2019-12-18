@@ -105,6 +105,9 @@ void Game::update(float dt) {
                 paused = true;
                 return;
             }
+            else if (e.key.keysym.sym == SDLK_b) {
+                player.set_location(glm::vec3(0.0f, 0.0f, 0.0f));
+            }
         }
         else if (e.type == SDL_KEYUP) {
             pc.KeyUp(e.key.keysym.sym);
