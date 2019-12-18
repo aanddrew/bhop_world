@@ -29,7 +29,7 @@ int main() {
     //bh::Menu main_menu;
     //int num_main_menu_options = sizeof(main_menu_strings)/sizeof(char*);
     //
-    s3::Window window("bhop_world", 1280, 720);
+    s3::Window window("bhop_world", 1920, 1080);
     SDL_Window* sdl_window = window.getSDLWindow();
 
     bh::Game game(sdl_window);
