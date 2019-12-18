@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <stage3/stage3.h>
 #include <vector>
 #include <string>

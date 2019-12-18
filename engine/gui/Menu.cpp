@@ -6,6 +6,8 @@ Menu::Menu() {
     
 }
 
+/*
+
 void Menu::hover_mouse(sf::Vector2<int> mouse_pos) {
     for (Button& b : buttons) {
         b.hover_mouse(mouse_pos);
@@ -32,5 +34,6 @@ void Menu::draw(
     }
 }
 
+*/
 
 }

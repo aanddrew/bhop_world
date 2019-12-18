@@ -1,14 +1,14 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <SFML/Graphics.hpp>
 #include <string>
 
 namespace bh {
 
-class Button : public sf::Drawable {
+class Button {
 public:
     Button();
+    /*
     Button(sf::Text text_in, const sf::Vector2<float> pos);
     void hover_mouse(sf::Vector2<int> mouse_pos);
     bool click_mouse(sf::Vector2<int> mouse_pos);
@@ -21,6 +21,7 @@ public:
 private:
     sf::Text text;
     //sf::RectangleShape bounds;
+    */
 };
 
 }

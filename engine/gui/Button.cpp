@@ -6,6 +6,8 @@ Button::Button() {
     
 }
 
+/*
+
 Button::Button(sf::Text text_in, const sf::Vector2<float> pos)
 : text(text_in) {
     text.setPosition(pos);
@@ -36,5 +38,7 @@ void Button::draw(
         sf::RenderStates states) const {
     window.draw(text);
 }
+
+*/
 
 }

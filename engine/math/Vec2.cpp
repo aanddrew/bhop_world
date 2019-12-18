@@ -94,8 +94,4 @@ float Vec2::dot(const Vec2& first, const Vec2& second) {
          + first.y * second.y;
 }
 
-sf::Vector2f Vec2::to_sfml_vector() const {
-    return sf::Vector2f(x, y);
-}
-
 }

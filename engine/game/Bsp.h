@@ -4,8 +4,6 @@
 #include <vector>
 #include "../physics/PhysTri3.h"
 
-#include <SFML/Graphics.hpp>
-
 namespace bh {
 
 struct node {

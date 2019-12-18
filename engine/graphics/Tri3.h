@@ -4,8 +4,6 @@
 #include "../math/Mat4.h"
 #include <glm/glm.hpp>
 
-#include <SFML/Graphics.hpp>
-
 namespace bh {
 
 class Tri3 {
