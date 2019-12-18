@@ -9,7 +9,8 @@ Player::Player()
 {}
 
 Player::Player(const glm::vec3& start_location)
-: velocity(0.0f, 0.0f, 0.0f)
+: velocity(0.0f, 0.0f, 0.0f),
+  acceleration(0.0f, 0.0f, 0.0f)
 {
     //camera.setPos(start_location);
     airborne = false;
