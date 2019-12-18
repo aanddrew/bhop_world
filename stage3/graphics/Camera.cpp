@@ -7,8 +7,10 @@ namespace s3
 {
 
 Camera::Camera()
+:
+pos(0.0f, 0.0f, 0.0f)
 {
-	pos = glm::vec3(0.0f, 0.0f, 0.0f);
+	//pos = glm::vec3(0.0f, 0.0f, 0.0f);
 	//construct our frame
 	forward = glm::vec3(0.0f, 0.0f, -1.0f);
 	up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -70,9 +72,9 @@ void Camera::normalizeFrame()
 	right = normalize(right);
 }
 
-glm::vec3 Camera::getForward() const {return forward;}
-glm::vec3 Camera::getRight() const {return right;}
-glm::vec3 Camera::getUp() const {return up;}
-glm::vec3 Camera::getPos() const {return pos;}
+const glm::vec3& Camera::getForward() const {return forward;}
+const glm::vec3& Camera::getRight() const {return right;}
+const glm::vec3& Camera::getUp() const {return up;}
+const glm::vec3& Camera::getPos() const {return pos;}
 
 }

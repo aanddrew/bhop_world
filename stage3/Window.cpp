@@ -30,6 +30,7 @@ namespace s3
 	    height,
 	    SDL_WINDOW_OPENGL
 	  );
+      SDL_SetWindowResizable(window, SDL_TRUE);
 
 	  //create context
 	  SDL_GLContext mainContext = SDL_GL_CreateContext(window);

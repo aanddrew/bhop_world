@@ -17,10 +17,10 @@ public:
 	void translate(const glm::vec3& translation);
 	void setPos(glm::vec3 newPosition);
 
-	glm::vec3 getForward() const;
-	glm::vec3 getRight() const;
-	glm::vec3 getUp() const;
-	glm::vec3 getPos() const;
+	const glm::vec3& getForward() const;
+	const glm::vec3& getRight() const;
+	const glm::vec3& getUp() const;
+	const glm::vec3& getPos() const;
 
 	glm::mat4 getMatrix() const;
 private:
