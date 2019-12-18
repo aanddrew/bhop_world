@@ -13,7 +13,7 @@ PlayerController::PlayerController(Player* player_in)
     for(int i = 0; i < NUM_MOVE_FLAGS; i++) {
         moving[i] = false;
     }
-    movement_mode = NOCLIP;
+    movement_mode = NORMAL;
     noclip_speed = 50.0f;
 }
 
