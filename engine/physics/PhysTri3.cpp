@@ -8,6 +8,10 @@ PhysTri3::PhysTri3()
 : Tri3()
 {}
 
+void print_vector(const glm::vec3& vec) {
+    std::cout << "[" << vec.x << ", " << vec.y << ", " << vec.z << "]" << std::endl;
+}
+
 PhysTri3::PhysTri3(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 n) 
 : Tri3(a, b, c, n)
 {
@@ -35,7 +39,8 @@ PhysTri3::PhysTri3(const Tri3& triangle)
 {}
 
 bool PhysTri3::collide_player(Player& player, float dt) const {
-    glm::vec3 next_location = player.get_location() + player.get_velocity() * dt;
+    //glm::vec3 next_location = player.get_location() + (player.get_velocity() * dt);
+    glm::vec3 next_location = player.get_location();
     glm::vec3 al = next_location - a;
     glm::vec3 bl = next_location - b;
     glm::vec3 cl = next_location - c;
@@ -48,6 +53,13 @@ bool PhysTri3::collide_player(Player& player, float dt) const {
         && dist_to_ab > 0
         && dist_to_bc > 0
         && dist_to_ac > 0) {
+        /*
+        std::cout << "colliding" << dist_to_plane << ", " 
+            << dist_to_ab << ", " 
+            << dist_to_bc<< ", " 
+            << dist_to_ac << ", " 
+            << std::endl;
+        */
         //correct collision
         float dr = player.get_radius() - dist_to_plane;
         player.set_velocity(player.get_velocity() - normal * glm::dot(player.get_velocity(), normal));

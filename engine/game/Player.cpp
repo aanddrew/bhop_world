@@ -13,16 +13,18 @@ Player::Player(const glm::vec3& start_location)
 {
     //camera.setPos(start_location);
     airborne = false;
-    move_speed = 13.0f;
+    move_speed = 26.0f;
 }
 
 void Player::update(float dt) {
     velocity += acceleration * dt;
     camera.translate(velocity * dt);
     //camera.movePos(glm::vec3(0.0f, 0.001f, 0.0f));
+    /*
     std::cout << "camera:" << std::endl;
     std::cout << velocity.x << ", " << velocity.y << ", " << velocity.z << std::endl;
     std::cout << camera.getPos().x << ", " << camera.getPos().y << ", " << camera.getPos().z << std::endl;
+    */
 }
 
 void Player::accelerate(const glm::vec3& wishdir, float dt) {

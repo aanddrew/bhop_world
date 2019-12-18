@@ -21,13 +21,14 @@ void split(const std::string& temp, std::string filled[], char del, int max_word
     
 Map::Map(const std::string& file_name, const GameSettings& settings) 
 : mesh(file_name),
-  texture("res/debug.png")
+  texture("res/cobble.png")
 {
     this->settings = &settings;
     //read in an obj file, and populate the array of triangles
     std::ifstream in_file(file_name);
     texture.load();
     mesh.load();
+
 
     if(!in_file.is_open()) {
         std::string err_message = "ERROR: CANNOT OPEN MESH FILE: " + file_name + ".";
@@ -94,9 +95,14 @@ Map::Map(const std::string& file_name, const GameSettings& settings)
 }
 
 void Map::collide_player(Player& player, float dt) const {
+    for (size_t i = 0; i < phys_triangles.size(); i++) {
+        phys_triangles.at(i).collide_player(player, dt);
+    }
+    /*
     for(auto& triangle : phys_triangles) {
         triangle.collide_player(player, dt);
     }
+    */
 }
 
 void Map::interact_player(Player& player, float dt) const {

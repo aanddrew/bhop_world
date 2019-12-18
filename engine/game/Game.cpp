@@ -8,7 +8,7 @@ Game::Game(SDL_Window* window_in)
 : window(window_in),
   player(),
   pc(&player),
-  map("maps/starter.obj", settings),
+  map("maps/first_surf.obj", settings),
   shader("stage3/res/basicVertexShader.GLSL", 
     "stage3/res/basicFragmentShader.GLSL")
 {
@@ -20,7 +20,7 @@ Game::Game(SDL_Window* window_in)
     float nearZ = 0.01f;
     float farZ = 2000.0f;
     float ar = 16.0f/9.0f;
-    float fov = 70.0f;
+    float fov = 90.0f;
 
     shader.createUniform("perspective");
     shader.setUniform("perspective",  glm::perspective(fov, ar, nearZ, farZ));
@@ -143,7 +143,10 @@ void Game::update(float dt) {
 	if (dx != 0 || dy != 0)
 		SDL_WarpMouseInWindow(window, w/2, h/2);
 
-    player.apply_gravity(glm::vec3(0.0f, -1 * settings.gravity, 0.0f), dt);
+    //player.apply_gravity(glm::vec3(0.0f, -1 * settings.gravity, 0.0f), dt);
+    if(pc.get_movement_mode() != bh::PlayerController::MODES::NOCLIP) {
+        map.interact_player(player, dt);
+    }
     pc.update(dt);
 }
 
