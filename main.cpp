@@ -43,6 +43,11 @@ int main() {
 
     float dt;
 
+    int w,h;
+    SDL_GetWindowSize(sdl_window, &w, &h);
+
+    SDL_WarpMouseInWindow(sdl_window, w/2, h/2);
+
     while(game.is_running()) {
         /*
         while(SDL_PollEvent(&e))
