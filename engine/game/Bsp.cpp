@@ -87,34 +87,4 @@ std::unique_ptr<node> Bsp::build_bsp(const std::vector<PhysTri3>& triangles) {
     return our_node;
 }
 
-/*
-void render_single_triangle(const Camera& camera, sf::RenderWindow& window, const PhysTri3& triangle) {
-    static bh::Tri2 projections[3];
-    int num_triangles = bh::Camera::project_triangle(camera, triangle, projections);
-    for(int i = 0; i < num_triangles; i++) {
-        bh::Tri2::draw_to_screen(projections[i], window);
-    }
-}
-*/
-/* 
-void render_bsp_helper(const Camera& camera, sf::RenderWindow& window, const std::unique_ptr<node>& our_node) {
-    if (our_node == nullptr)
-        return;
-    if (point_behind_plane(our_node->triangle.a, our_node->triangle.get_normal(), camera.get_location())) {
-        render_bsp_helper(camera, window, our_node->front);
-        render_single_triangle(camera, window, our_node->triangle);
-        render_bsp_helper(camera, window, our_node->back);
-    }
-    else {
-        render_bsp_helper(camera, window, our_node->back);
-        render_single_triangle(camera, window, our_node->triangle);
-        render_bsp_helper(camera, window, our_node->front);
-    }
-}
-
-void Bsp::draw_bsp(const Camera& camera, sf::RenderWindow& window) const {
-    render_bsp_helper(camera, window, head);
-}
-*/
-
 }

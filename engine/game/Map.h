@@ -13,7 +13,6 @@ class Map {
 public:
     Map(const std::string& file_name, const GameSettings& settings);
 
-    //void draw(const Camera& camera, sf::RenderWindow& window) const;
     void draw();
     void interact_player(Player& player, float dt) const;
 private:

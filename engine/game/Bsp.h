@@ -16,7 +16,6 @@ class Bsp {
 public:
     Bsp();
     Bsp(const std::vector<PhysTri3>& triangles);
-    //void draw_bsp(const Camera& camera, sf::RenderWindow& window) const;
 private:
     std::unique_ptr<node> build_bsp(const std::vector<PhysTri3>& triangles);
     std::unique_ptr<node> head;
